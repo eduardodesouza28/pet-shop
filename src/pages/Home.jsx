@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import PetCard from '../components/PetCard'; // Import PetCard
+import PetCard from '../components/PetCard';
 
-// --- Configuration ---
 const MOCKAPI_PETS_URL = 'https://681258653ac96f7119a7be3d.mockapi.io/api/tt/pets';
 const DOG_API_URL = 'https://dog.ceo/api/breeds/image/random';
 const PETS_TO_SHOW = 3;
-// --- End Configuration ---
 
-// Basic styling
 const homeStyle = { padding: '20px', fontFamily: 'Arial, sans-serif' };
 const petListStyle = { display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '15px' };
 const buttonStyle = {
@@ -35,19 +32,15 @@ function Home() {
       setLoading(true);
       setError(null);
       try {
-        // 1. Fetch all pets
         const petsResponse = await axios.get(MOCKAPI_PETS_URL);
-        // Get the latest pets (assuming higher IDs are newer, or just take the last ones)
         const latestPetsData = petsResponse.data.slice(-PETS_TO_SHOW);
 
-        // 2. Fetch random images for each of the latest pets
         const imagePromises = latestPetsData.map(() => axios.get(DOG_API_URL));
         const imageResponses = await Promise.all(imagePromises);
 
-        // 3. Combine pet data with image URLs
         const petsWithImages = latestPetsData.map((pet, index) => ({
           ...pet,
-          imageUrl: imageResponses[index].data.message, // Get the image URL from Dog API response
+          imageUrl: imageResponses[index].data.message,
         }));
 
         setPets(petsWithImages);
@@ -60,7 +53,7 @@ function Home() {
     };
 
     fetchPetsAndImages();
-  }, []); // Empty dependency array means this runs once on mount
+  }, []);
 
   return (
     <div style={homeStyle}>
@@ -80,7 +73,6 @@ function Home() {
                 breed={pet.breed}
                 age={pet.age}
                 imageUrl={pet.imageUrl}
-              // No owner needed on home page card
               />
             ))
           ) : (
