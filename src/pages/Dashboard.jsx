@@ -80,9 +80,9 @@ function Dashboard() {
             pets.map(pet => (
               <PetCard
                 key={pet.id}
-                name={pet.name}
-                breed={pet.breed}
-                age={pet.age}
+                name={pet.nome}
+                breed={pet.raca}
+                age={pet.idade}
                 owner={pet.owner}
                 imageUrl={pet.imageUrl}
               />
