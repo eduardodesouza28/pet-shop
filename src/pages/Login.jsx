@@ -2,23 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const loginContainerStyle = {
-  maxWidth: '400px',
-  margin: '50px auto',
-  padding: '30px',
-  border: '1px solid #ccc',
-  borderRadius: '8px',
-  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-  fontFamily: 'Arial, sans-serif',
-  textAlign: 'center',
-};
-const inputStyle = {
-  width: 'calc(100% - 22px)',
-  padding: '10px',
-  marginBottom: '15px',
-  border: '1px solid #ccc',
-  borderRadius: '4px',
-};
+
+
 const buttonStyle = {
   width: '100%',
   padding: '12px',
@@ -32,16 +17,6 @@ const buttonStyle = {
 };
 const buttonHoverStyle = {
   backgroundColor: '#218838',
-};
-const errorStyle = {
-  color: 'red',
-  marginTop: '10px',
-  fontSize: '14px',
-};
-const loadingStyle = {
-  color: 'grey',
-  marginTop: '10px',
-  fontSize: '14px',
 };
 
 function Login() {
@@ -64,13 +39,13 @@ function Login() {
   };
 
   return (
-    <div style={loginContainerStyle}>
+    <div className='login-container'>
       <h2>Login de Funcionário</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email:</label>
           <input
-            style={inputStyle}
+            className='input'
             type="email"
             id="email"
             value={email}
@@ -82,7 +57,7 @@ function Login() {
         <div>
           <label htmlFor="password">Senha:</label>
           <input
-            style={inputStyle}
+            className='input'
             type="password"
             id="password"
             value={password}
@@ -100,8 +75,8 @@ function Login() {
         >
           {authLoading ? 'Entrando...' : 'Entrar'}
         </button>
-        {authLoading && <p style={loadingStyle}>Verificando...</p>}
-        {authError && !authLoading && <p style={errorStyle}>{authError}</p>}
+        {authLoading && <p className='loading'>Verificando...</p>}
+        {authError && !authLoading && <p className='error'>{authError}</p>}
       </form>
     </div>
   );

@@ -3,22 +3,10 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import PetCard from '../components/PetCard';
+import '../style.css';
 
 const MOCKAPI_PETS_URL = 'https://681258653ac96f7119a7be3d.mockapi.io/api/tt/pets';
 const DOG_API_URL = 'https://dog.ceo/api/breeds/image/random';
-
-const dashboardStyle = { padding: '20px', fontFamily: 'Arial, sans-serif' };
-const headerStyle = { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' };
-const petListStyle = { display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '15px' };
-const logoutButtonStyle = {
-  padding: '8px 15px',
-  backgroundColor: '#dc3545',
-  color: 'white',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: 'pointer',
-};
-const loadingErrorStyle = { textAlign: 'center', marginTop: '20px', color: 'grey' };
 
 function Dashboard() {
   const [pets, setPets] = useState([]);
@@ -60,22 +48,22 @@ function Dashboard() {
   };
 
   return (
-    <div style={dashboardStyle}>
-      <div style={headerStyle}>
+    <div className='dashboard'>
+      <div className='dashboard-header'>
         <h1>Dashboard PetCare</h1>
         {user && <span>Olá, {user.name}!</span>}
-        <button onClick={handleLogout} style={logoutButtonStyle}>
+        <button onClick={handleLogout} className='logout-button'>
           Sair
         </button>
       </div>
 
       <h2>Lista de Pacientes</h2>
 
-      {loading && <p style={loadingErrorStyle}>Carregando lista de pets...</p>}
-      {error && <p style={loadingErrorStyle}>Erro: {error}</p>}
+      {loading && <p className='loading-error'>Carregando lista de pets...</p>}
+      {error && <p className='loading-error'>Erro: {error}</p>}
 
       {!loading && !error && (
-        <div style={petListStyle}>
+        <div className='pet-list'>
           {pets.length > 0 ? (
             pets.map(pet => (
               <PetCard

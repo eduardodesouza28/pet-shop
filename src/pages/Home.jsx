@@ -2,25 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PetCard from '../components/PetCard';
+import '../style.css';
 
 const MOCKAPI_PETS_URL = 'https://681258653ac96f7119a7be3d.mockapi.io/api/tt/pets';
 const DOG_API_URL = 'https://dog.ceo/api/breeds/image/random';
 const PETS_TO_SHOW = 3;
-
-const homeStyle = { padding: '20px', fontFamily: 'Arial, sans-serif' };
-const petListStyle = { display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '15px' };
-const buttonStyle = {
-  display: 'inline-block',
-  marginTop: '20px',
-  padding: '10px 20px',
-  backgroundColor: '#007bff',
-  color: 'white',
-  textDecoration: 'none',
-  borderRadius: '5px',
-  fontSize: '16px',
-  cursor: 'pointer',
-};
-const loadingErrorStyle = { textAlign: 'center', marginTop: '20px', color: 'grey' };
 
 function Home() {
   const [pets, setPets] = useState([]);
@@ -56,15 +42,15 @@ function Home() {
   }, []);
 
   return (
-    <div style={homeStyle}>
+    <div className='home'>
       <h1>Bem-vindo à Clínica Veterinária PetCare!</h1>
       <p>Conheça alguns de nossos pacientes mais recentes:</p>
 
-      {loading && <p style={loadingErrorStyle}>Carregando pets...</p>}
-      {error && <p style={loadingErrorStyle}>Erro: {error}</p>}
+      {loading && <p className='loading-error'>Carregando pets...</p>}
+      {error && <p className='loading-error'>Erro: {error}</p>}
 
       {!loading && !error && (
-        <div style={petListStyle}>
+        <div className='pet-list'>
           {pets.length > 0 ? (
             pets.map(pet => (
               <PetCard
@@ -82,7 +68,7 @@ function Home() {
       )}
 
       <div style={{ textAlign: 'center', marginTop: '30px' }}>
-        <Link to="/login" style={buttonStyle}>
+        <Link to="/login" className='login-button'>
           Entrar como Funcionário
         </Link>
       </div>
